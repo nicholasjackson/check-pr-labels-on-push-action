@@ -7,9 +7,15 @@ inputs:
   labels:  # id of input
     description: "The array of label name, e.g. '[\"label-1\", \"label-2\"]'"
     required: true
+  match-any:  # id of input
+    description: "If true the if any labels are applied to the PR, the action will return true. If false, all labels must be applied to the PR"
+    required: false
+    default: 'false'
 outputs:
   result: # id of output
     description: 'The result if given labels have be applied to the PR'
+  labels: # id of output
+    description: 'The labels applied to the PR'
 runs:
   using: 'node12'
   main: 'dist/index.js'

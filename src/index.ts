@@ -4,12 +4,22 @@ import * as github from "@actions/github";
 async function run() {
   const token = core.getInput("github-token", { required: true });
   const client = new github.GitHub(token);
+  const match_any = core.getInput("match-any", { required: false });
 
   const labelNames = await getPullRequestLabelNames(client);
 
   const labels = getInputLabels();
-  const result = labels.every((label) => labelNames.includes(label));
+
+  let result = false;
+
+  if(match_any === "true") {
+    result = labels.some((label) => labelNames.includes(label));
+  } else {
+    result = labels.every((label) => labelNames.includes(label));
+  }
+
   core.setOutput("result", result);
+  core.setOutput("labels", labelNames);
 }
 
 async function getPullRequestLabelNames(

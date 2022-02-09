@@ -18,8 +18,8 @@ async function run() {
     result = labels.every((label) => labelNames.includes(label));
   }
 
-  console.log("results",result);
-  console.log("label",labelNames);
+  core.debug("results",result);
+  core.debug("label",labelNames);
 
   core.setOutput("result", result);
   core.setOutput("labels", labelNames);

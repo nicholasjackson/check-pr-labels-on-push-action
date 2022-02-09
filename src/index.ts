@@ -12,11 +12,14 @@ async function run() {
 
   let result = false;
 
-  if(match_any === "true") {
+  if(match_any == "true") {
     result = labels.some((label) => labelNames.includes(label));
   } else {
     result = labels.every((label) => labelNames.includes(label));
   }
+
+  console.log("results",result);
+  console.log("label",labelNames);
 
   core.setOutput("result", result);
   core.setOutput("labels", labelNames);
